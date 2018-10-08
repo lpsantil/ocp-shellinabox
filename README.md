@@ -22,6 +22,6 @@ oc start-build siab --from-dir=src/
 ```
 
 ## Usage
-* Visit the exposde route
+* Visit the exposed route
 
 ## References
