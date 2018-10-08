@@ -4,6 +4,9 @@ MAINTAINER Louis P. Santillan <lpsantil@gmail.com>
 
 WORKDIR /tmp
 
+# Run as root
+USER 0
+
 # Add our init script
 ADD startsiab.sh /opt/startsiab.sh
 # Fix up the Reverse coloring
@@ -14,9 +17,6 @@ ADD dockerfile.nanorc /usr/share/nano/dockerfile.nanorc
 ADD javascript.nanorc /usr/share/nano/javascript.nanorc
 # Enable nano syntax highlighting
 ADD nanorc /tmp/nanorc
-
-#    \ # Install our developer tools
-#    groupadd nogroup && \
 
 # Install EPEL
 # Install our developer tools (tmux, ansible, nano, vim, bash-completion, wget)
@@ -49,9 +49,6 @@ RUN yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel
     sed -i '/pam_loginuid.so/c\#session    required     pam_loginuid.so' /etc/pam.d/login && \
     sed -i '/pam_loginuid.so/c\#session    required     pam_loginuid.so' /etc/pam.d/remote && \
     echo "Done building siab container"
-
-# Install our developer tools
-USER 0
 
 # shellinabox will listen on 8080
 EXPOSE 8080
