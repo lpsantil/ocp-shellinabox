@@ -1,6 +1,6 @@
 FROM centos:7
 
-MAINTAINER Louis P. Santillan <lsantill@redhat.com>
+MAINTAINER Louis P. Santillan <lpsantil@gmail.com>
 
 WORKDIR /tmp
 
