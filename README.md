@@ -6,7 +6,7 @@ shellinabox containers for OpenShift/OKD/CDK/Minishift - in various flavors
 ## Building
 ```
 # Define a new BuildConfig
-oc new-build --strategy=docker --name=siab src/
+oc new-build --strategy=docker --name=siab ocp-siab/
 # Define new Service and DeploymentConfig
 oc new-app --image-stream=siab --name=siab
 # Create a ServiceAccount to let our container startup as a privileged pod
@@ -18,7 +18,7 @@ oc patch dc/siab --patch '{"spec":{"template":{"spec":{"serviceAccountName": "si
 # Expose our shellinabox container
 oc expose svc/siab
 # Rebuild the pod which will also cause a redeployment
-oc start-build siab --from-dir=src/
+oc start-build siab --from-dir=ocp-siab/
 ```
 
 ## Usage
