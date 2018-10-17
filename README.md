@@ -7,7 +7,6 @@ shellinabox containers for OpenShift/OKD/CDK/Minishift - in various flavors
 * Has syntax highlighting installed for `nano` and `vim`
 * Default user is completely unprivileged
 * Easy to access.  Default user creds are `developer/developer`.
-* The `developer` password can be reset by using a secret
 * Runs on the OpenShift cluster (consolidation of resource usage)
 * You can run an instance in one more project namespaces, and `ZERO LOCAL MACHINE INSTALL`
 * The BAD: It has to run with an SCC to start shellinbox as `root`
