@@ -20,7 +20,7 @@ echo "Using secret to update password"
 echo "$SIABPWD" | passwd developer --stdin
 
 echo "Randomizing root's password"
-cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1 | password root --stdin
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1 | passwd root --stdin
 
 unset SIABPWD
 
