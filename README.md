@@ -2,7 +2,7 @@
 shellinabox containers for OpenShift/OKD/CDK/Minishift - in various flavors
 
 ## Features
-* The GOOD: `ocp-siab` has `ansible, vim, nano, git, screen, tmux, bash-completion, oc client` installed
+* The GOOD: `ocp-siab` has `vim, nano, git, screen, tmux, bash-completion, oc client` installed
 * Users only need a browser to access basic tools (`ZERO LOCAL MACHINE INSTALL`!)
 * Has syntax highlighting installed for `nano` and `vim`
 * Default user is completely unprivileged
