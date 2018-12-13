@@ -34,9 +34,9 @@ oc start-build siab --from-dir=ocp-siab/
 * Visit the exposed route
 
 ## References
-[openshiftcli-inabox][0]
-[docker-shellinabox][1]
-[ssh-git-docker][2]
+* [openshiftcli-inabox][0]
+* [docker-shellinabox][1]
+* [ssh-git-docker][2]
 
 [0]: https://github.com/VeerMuchandi/openshiftcli-inabox
 [1]: https://github.com/andrefernandes/docker-shellinabox
