@@ -15,18 +15,26 @@ then
 	export SIABREVERSE=black-on-white
 fi
 
-
 echo "Using secret to update password"
-echo "$SIABPWD" | passwd developer --stdin
+/usr/bin/expect << EOD
 
-echo "Randomizing root's password"
-cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1 | passwd root --stdin
+spawn passwd
+expect "assword:"
+send "developer\r"
+expect "New password:"
+send "$SIABPWD\r"
+expect "Retype new password:"
+send "$SIABPWD\r"
+
+expect eof
+
+EOD
 
 unset SIABPWD
 
-shellinaboxd -t -p 8080 -d \
+shellinaboxd -t -p 8080 --disable-peer-check -d \
 	--user-css Reverse:-/usr/share/shellinabox/$SIABREVERSE.css,Normal:+/usr/share/shellinabox/$SIABNORMAL.css \
-	-s "/:LOGIN" 2>&1
+	-s "/:developer:developer:/home/developer:/usr/bin/su developer" -u developer -g developer 2>&1
 
 echo "----------should not get here----------"
 

@@ -29,8 +29,20 @@ ADD nanorc /tmp/nanorc
 # Randomize root's password
 # Be sure to remove login's lock file
 # Tell PAM to use sessions
+#    mkdir /var/run/sshd && \
+#    ssh-keygen -A && \
+#    sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/sshd_config && \
+#    /usr/bin/sshd && \
+##    echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/root-group && \
+#    mkdir /var/run/sshd && \
+#    chmod -R 666 /etc/ssh && \
+#    sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/sshd_config && \
+#    chmod -R 777 /etc && \
+#    echo "developer ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/developer && \
+#    sed -i '/pam_loginuid.so/c\#session    required     pam_loginuid.so' /etc/pam.d/login && \
+#    sed -i '/pam_loginuid.so/c\#session    required     pam_loginuid.so' /etc/pam.d/remote && \
 RUN yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm && \
-    yum install -y jq vim screen which hostname passwd tmux nano wget git bash-completion openssl shellinabox --enablerepo=epel && \
+    yum install -y jq vim screen which hostname passwd tmux nano wget git bash-completion openssl shellinabox util-linux expect --enablerepo=epel && \
     yum clean all && \
     cd /tmp/ && \
     wget https://github.com/openshift/origin/releases/download/v3.10.0/openshift-origin-client-tools-v3.10.0-dd10d17-linux-64bit.tar.gz && \
@@ -44,14 +56,15 @@ RUN yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel
     mv -v /tmp/nanorc /home/developer/.nanorc && \
     chown 1001:1001 /home/developer/.nanorc && \
     ( echo "developer" | passwd developer --stdin ) && \
-    ( cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1 | passwd root --stdin ) && \
+    ( cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 128 | head -n 1 | passwd root --stdin ) && \
     rm -f /var/run/nologin && \
-    sed -i '/pam_loginuid.so/c\#session    required     pam_loginuid.so' /etc/pam.d/login && \
-    sed -i '/pam_loginuid.so/c\#session    required     pam_loginuid.so' /etc/pam.d/remote && \
     echo "Done building siab container"
 
 # shellinabox will listen on 8080
 EXPOSE 8080
+
+# Run as developer
+USER 1001
 
 # Run our init script
 CMD /opt/startsiab.sh
