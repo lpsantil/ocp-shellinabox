@@ -9,7 +9,7 @@ shellinabox containers for OpenShift/OKD/CDK/Minishift - in various flavors
 * Easy to access.  Default user creds are `developer/developer`.
 * Runs on the OpenShift cluster (consolidation of resource usage)
 * You can run an instance in one more project namespaces, and `ZERO LOCAL MACHINE INSTALL`
-* The GOOD: It runs with an SCC to start shellinbox as unprivliged user `developer`
+* The GOOD: It runs with an SCC to start shellinbox as unprivleged user `developer`
 * The GOOD: Changing `developer`'s password is as simple as creating and injecting a secret as an environment var `SIABPWD`
 
 ## Building
