@@ -30,6 +30,8 @@ then
 	export SIABREVERSE=black-on-white
 fi
 
+cat /opt/siab.logo.txt
+
 shellinaboxd -t -p 8080 --disable-peer-check -d \
 	--user-css Reverse:-/usr/share/shellinabox/$SIABREVERSE.css,Normal:+/usr/share/shellinabox/$SIABNORMAL.css \
 	-s "/:developer:developer:/home/developer:/usr/bin/su developer" -u developer -g developer 2>&1

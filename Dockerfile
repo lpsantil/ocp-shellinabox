@@ -1,4 +1,4 @@
-FROM centos:7
+FROM registry.access.redhat.com/rhel7/rhel
 
 MAINTAINER Louis P. Santillan <lpsantil@gmail.com>
 
@@ -9,6 +9,8 @@ USER 0
 
 # Add our init script
 ADD startsiab.sh /opt/startsiab.sh
+# Add our logo
+ADD siab.logo.txt /opt/siab.logo.txt
 # Fix up the Reverse coloring
 ADD black-on-white.css /usr/share/shellinabox/black-on-white.css
 # Add nano syntax highlighting for Dockerfiles
@@ -28,19 +30,46 @@ ADD nanorc /tmp/nanorc
 # Set the default password for our 'developer' user
 # Randomize root's password
 # Be sure to remove login's lock file
-RUN echo "=== Installing EPEL ===" && \
+#       --enablerepo=rhel-7-server-devtools-rpms && \
+#       --enablerepo=rhel-server-rhscl-7-rpms && \
+#       --enablerepo=rhel-7-server-ose-3.11-rpms && \
+#       --enablerepo=epel && \
+### after.... cd /tmp && \
+#    echo "\n=== Installing oc ===" && \
+#    wget https://github.com/openshift/origin/releases/download/v3.10.0/openshift-origin-client-tools-v3.10.0-dd10d17-linux-64bit.tar.gz && \
+#    ls -lah /tmp/ && \
+#    echo "\n=== Untar'ing 'oc' ===" && \
+#    tar zxvf /tmp/openshift-origin-client-tools-v3.10.0-dd10d17-linux-64bit.tar.gz && \
+#    echo "\n=== Copying 'oc' ===" && \
+#    mv -v /tmp/openshift-origin-client-tools-v3.10.0-dd10d17-linux-64bit/oc /usr/local/bin/ && \
+#       rhel-7-server-rpms,\
+#       rhel-7-server-extra-rpms,\
+#       rhel-7-server-optional-rpms,\
+#       rhel-7-server-ose-3.11-rpms,\
+#       rhel-7-server-devtools-rpms,\
+#       rhel-server-rhscl-7-rpms,\
+#       epel \
+RUN echo "" && \
+    cat /opt/siab.logo.txt && \
+    echo "=== Installing EPEL ===" && \
     yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm && \
     echo "\n=== Installing developer tools ===" && \
-    yum install -y jq vim screen which hostname passwd tmux nano wget git bash-completion openssl shellinabox util-linux expect --enablerepo=epel && \
+    yum-config-manager --enable \
+    && \
+    yum install -y \
+       jq vim screen which hostname passwd tmux nano wget git \
+       bash-completion openssl shellinabox util-linux expect \
+       atomic-openshift-clients \
+       --enablerepo=rhel-7-server-rpms \
+       --enablerepo=rhel-7-server-extras-rpms \
+       --enablerepo=rhel-7-server-optional-rpms \
+       --enablerepo=rhel-7-server-ose-3.11-rpms \
+       --enablerepo=rhel-7-server-devtools-rpms \
+       --enablerepo=rhel-server-rhscl-7-rpms \
+       --enablerepo=epel \
+    && \
     yum clean all && \
-    cd /tmp/ && \
-    echo "\n=== Installing oc ===" && \
-    wget https://github.com/openshift/origin/releases/download/v3.10.0/openshift-origin-client-tools-v3.10.0-dd10d17-linux-64bit.tar.gz && \
-    ls -lah /tmp/ && \
-    echo "\n=== Untar'ing 'oc' ===" && \
-    tar zxvf /tmp/openshift-origin-client-tools-v3.10.0-dd10d17-linux-64bit.tar.gz && \
-    echo "\n=== Copying 'oc' ===" && \
-    mv -v /tmp/openshift-origin-client-tools-v3.10.0-dd10d17-linux-64bit/oc /usr/local/bin/ && \
+    cd /tmp && \
     echo "\n=== Installing 'developer' user ===" && \
     useradd -u 1001 developer -m && \
     mkdir -pv /home/developer/bin /home/developer/tmp && \
@@ -54,7 +83,10 @@ RUN echo "=== Installing EPEL ===" && \
     ( cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 128 | head -n 1 | passwd root --stdin ) && \
     echo "\n=== Removing login's lock file ===" && \
     rm -f /var/run/nologin && \
-    echo "*** Done building siab container ***"
+    echo "*** Done building siab container ***" && \
+    cat /opt/siab.logo.txt && \
+    echo ""
+
 
 # shellinabox will listen on 8080
 EXPOSE 8080

@@ -33,9 +33,31 @@ oc expose svc/siab
 oc annotate route siab --overwrite haproxy.router.openshift.io/timeout=600s
 ```
 
+If you're building in CDK or build does not include the `oc` binary in your resulting container, you'll need to re-register the VM, and enable the OpenShift Container Platform repo
+```
+# Login to your running CDK/minishift VM
+minishift ssh
+# Elevate your privileges to root
+sudo su -
+# Temporarily unregister the VM
+subscription-manager unregister
+# Re-register the VM
+subscription-manager register
+# Find the Pool ID associated with OpenShift Container Platform
+subscription-manager list --available | less
+# Attach the Pool ID
+subscription-manager attach --pool=<POOLID>
+# Enable the OpenShift Container Platform repo
+subscription-manager repos --enable=rhel-7-server-ose-3.11-rpms
+# Exit out of root
+exit
+```
+
+
 ## Usage
 * Visit the exposed route
 * In CDK/Minishift, the route would be something like http://siab-myproject.192.168.99.100.nip.io
+* To avoid closing your browser tab while using `nano`, `^W` (`Where Is` function) has been remapped to `^F`
 
 ## References
 * [openshiftcli-inabox][0]
