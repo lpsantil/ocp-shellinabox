@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/rhel7-minimal
+FROM registry.access.redhat.com/rhel7/rhel
 
 MAINTAINER Louis P. Santillan <lpsantil@gmail.com>
 
@@ -35,10 +35,12 @@ ADD motd /etc/motd
 RUN echo "" && \
     cat /opt/siab.logo.txt && \
     echo "=== Installing EPEL ===" && \
-    curl -o /tmp/epel.rpm http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm && \
-    rpm -ivh /tmp/epel.rpm && \
+    yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm && \
     echo "\n=== Installing developer tools ===" && \
-    microdnf \
+    yum install -y \
+       jq vim screen which hostname passwd tmux nano wget git \
+       bash-completion openssl shellinabox util-linux expect \
+       atomic-openshift-clients \
        --enablerepo=rhel-7-server-rpms \
        --enablerepo=rhel-7-server-extras-rpms \
        --enablerepo=rhel-7-server-optional-rpms \
@@ -46,12 +48,8 @@ RUN echo "" && \
        --enablerepo=rhel-7-server-devtools-rpms \
        --enablerepo=rhel-server-rhscl-7-rpms \
        --enablerepo=epel \
-       install \
-       jq vim screen which hostname passwd tmux nano wget git \
-       bash-completion openssl shellinabox util-linux expect \
-       atomic-openshift-clients \
     && \
-    microdnf clean all && \
+    yum clean all && \
     cd /tmp && \
     echo "\n=== Installing 'developer' user ===" && \
     useradd -u 1001 developer -m && \
