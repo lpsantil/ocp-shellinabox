@@ -14,6 +14,14 @@ shellinabox container for OpenShift/OKD/CDK/Minishift
 * The GOOD: Changing `developer`'s password is as simple as creating a secret and injecting as an environment var `SIABPWD`
 
 ## Building and deploying
+Automated Steps
+```
+# Execute the YAML template
+oc apply -f siab.template.yaml
+# Wait for about 5 minutes for the container to build and deploy
+```
+
+Manual steps
 ```
 # Define a new BuildConfig
 oc new-build --strategy=docker --name=siab .
