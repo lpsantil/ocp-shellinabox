@@ -20,7 +20,7 @@ ADD javascript.nanorc /usr/share/nano/javascript.nanorc
 # Enable nano syntax highlighting
 ADD nanorc /tmp/nanorc
 # Enable custom motd
-ADD nanorc /etc/motd
+ADD motd /etc/motd
 
 # Install EPEL
 # Install our developer tools (tmux, ansible, nano, vim, bash-completion, wget)
