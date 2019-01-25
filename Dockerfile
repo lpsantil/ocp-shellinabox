@@ -30,32 +30,11 @@ ADD nanorc /tmp/nanorc
 # Set the default password for our 'developer' user
 # Randomize root's password
 # Be sure to remove login's lock file
-#       --enablerepo=rhel-7-server-devtools-rpms && \
-#       --enablerepo=rhel-server-rhscl-7-rpms && \
-#       --enablerepo=rhel-7-server-ose-3.11-rpms && \
-#       --enablerepo=epel && \
-### after.... cd /tmp && \
-#    echo "\n=== Installing oc ===" && \
-#    wget https://github.com/openshift/origin/releases/download/v3.10.0/openshift-origin-client-tools-v3.10.0-dd10d17-linux-64bit.tar.gz && \
-#    ls -lah /tmp/ && \
-#    echo "\n=== Untar'ing 'oc' ===" && \
-#    tar zxvf /tmp/openshift-origin-client-tools-v3.10.0-dd10d17-linux-64bit.tar.gz && \
-#    echo "\n=== Copying 'oc' ===" && \
-#    mv -v /tmp/openshift-origin-client-tools-v3.10.0-dd10d17-linux-64bit/oc /usr/local/bin/ && \
-#       rhel-7-server-rpms,\
-#       rhel-7-server-extra-rpms,\
-#       rhel-7-server-optional-rpms,\
-#       rhel-7-server-ose-3.11-rpms,\
-#       rhel-7-server-devtools-rpms,\
-#       rhel-server-rhscl-7-rpms,\
-#       epel \
 RUN echo "" && \
     cat /opt/siab.logo.txt && \
     echo "=== Installing EPEL ===" && \
     yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm && \
     echo "\n=== Installing developer tools ===" && \
-    yum-config-manager --enable \
-    && \
     yum install -y \
        jq vim screen which hostname passwd tmux nano wget git \
        bash-completion openssl shellinabox util-linux expect \
