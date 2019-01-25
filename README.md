@@ -1,6 +1,6 @@
 # ocp-shellinabox
 shellinabox container for OpenShift/OKD/CDK/Minishift
-
+ 
 ## Features
 * Provides a basic, lightweight container to administer OpenShift-based clusters
 * The GOOD: `ocp-siab` has `vim, nano, git, screen, tmux, bash-completion, oc client` installed
@@ -67,3 +67,4 @@ exit
 [0]: https://github.com/VeerMuchandi/openshiftcli-inabox
 [1]: https://github.com/andrefernandes/docker-shellinabox
 [2]: https://github.com/openshift-qe/ssh-git-docker
+

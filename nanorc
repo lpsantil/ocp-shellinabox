@@ -76,7 +76,7 @@ set const
 ## separate buffer).  You must have configured with --enable-multibuffer
 ## for this to work.
 ##
-set multibuffer
+#set multibuffer
 
 ## Don't convert files from DOS/Mac format.
 set noconvert

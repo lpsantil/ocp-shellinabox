@@ -1,0 +1,20 @@
+   ██████  ██▓ ▄▄▄       ▄▄▄▄   
+ ▒██    ▒ ▓██▒▒████▄    ▓█████▄ 
+ ░ ▓██▄   ▒██▒▒██  ▀█▄  ▒██▒ ▄██
+   ▒   ██▒░██░░██▄▄▄▄██ ▒██░█▀  
+ ▒██████▒▒░██░ ▓█   ▓██▒░▓█  ▀█▓
+ ▒ ▒▓▒ ▒ ░░▓   ▒▒   ▓▒█░░▒▓███▀▒
+ ░ ░▒  ░ ░ ▒ ░  ▒   ▒▒ ░▒░▒   ░ 
+ ░  ░  ░   ▒ ░  ░   ▒    ░    ░ 
+       ░   ░        ░  ░ ░      
+                              ░ 
+ 
+# ocp-shellinabox
+shellinabox container for OpenShift/OKD/CDK/Minishift
+
+## Features
+* Provides a basic, lightweight container to administer OpenShift-based clusters
+* `ocp-siab` has `vim, nano, git, screen, tmux, bash-completion, oc client` installed
+* Users only need a browser to access basic tools (`ZERO LOCAL MACHINE INSTALL`!)
+* Has syntax highlighting installed for `nano` and `vim`
+
