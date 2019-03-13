@@ -49,7 +49,7 @@ RUN echo "" && \
     echo "\n=== Bringing in nano's user config ===" && \
     mv -v /tmp/nanorc /home/developer/.nanorc && \
     echo "\n=== Giving nano's user config the correct ownership ===" && \
-    chown 1001:1001 /home/developer/.nanorc && \
+    chown -R 1001:1001 /home/developer && \
     echo "\n=== Setting the default password for our 'developer' user ===" && \
     ( echo "developer" | passwd developer --stdin ) && \
     echo "\n=== Randomizing root's password ===" && \
